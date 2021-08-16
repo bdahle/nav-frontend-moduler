@@ -23,3 +23,4 @@ export {
   default as ConfirmationPanel,
   ConfirmationPanelProps,
 } from "./ConfirmationPanel";
+export { default as SearchField } from "./SearchField";
