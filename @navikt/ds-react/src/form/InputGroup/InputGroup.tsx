@@ -1,4 +1,4 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef } from "react";
 import cl from "classnames";
 import { BodyShort, Label } from "../..";
 import ErrorMessage from "../ErrorMessage";
@@ -6,11 +6,8 @@ import { FormFieldProps, useFormField } from "../useFormField";
 
 export interface InputGroupProps
   extends FormFieldProps,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
-  /**
-   * Expose the HTML size attribute
-   */
-  htmlSize?: number;
+    React.HTMLAttributes<HTMLElement> {
+  children: React.ReactNode;
   /**
    * If enabled shows the label and description for screenreaders only
    */
@@ -30,13 +27,13 @@ const TextField = forwardRef<HTMLInputElement, InputGroupProps>(
       hasError,
       size,
       inputDescriptionId,
-    } = useFormField(props, "textField");
+    } = useFormField(props, "input-group");
 
     const {
       label,
       className,
+      children,
       description,
-      htmlSize,
       hideLabel = false,
       ...rest
     } = props;
@@ -47,21 +44,21 @@ const TextField = forwardRef<HTMLInputElement, InputGroupProps>(
           props.className,
           "navds-form-field",
           `navds-form-field--${size}`,
-          { "navds-text-field--error": hasError }
+          { "navds-form-field--error": hasError }
         )}
       >
         <Label
           htmlFor={inputProps.id}
           size={size}
           component="label"
-          className={cl("navds-text-field__label", { "sr-only": hideLabel })}
+          className={cl("navds-input-group__label", { "sr-only": hideLabel })}
         >
           {label}
         </Label>
 
         {!!description && (
           <BodyShort
-            className={cl("navds-text-field__description", {
+            className={cl("navds-input-group__description", {
               "sr-only": hideLabel,
             })}
             id={inputDescriptionId}
@@ -70,7 +67,7 @@ const TextField = forwardRef<HTMLInputElement, InputGroupProps>(
             {description}
           </BodyShort>
         )}
-        <input
+        {/* <input
           {...rest}
           {...inputProps}
           ref={ref}
@@ -82,7 +79,8 @@ const TextField = forwardRef<HTMLInputElement, InputGroupProps>(
             `navds-body-${size ?? "m"}`
           )}
           size={htmlSize}
-        />
+        /> */}
+        {children}
         <div id={errorId} aria-relevant="additions removals" aria-live="polite">
           {showErrorMsg && (
             <ErrorMessage size={size}>{props.error}</ErrorMessage>

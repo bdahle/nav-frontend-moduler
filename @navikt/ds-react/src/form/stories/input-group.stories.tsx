@@ -14,8 +14,8 @@ export const All = () => {
       <h1>InputGroup</h1>
 
       <InputGroup
-        label="Mollit eiusmod"
-        description="Aliqua exercitation cillum pariatur"
+        label="Søk for sider om foreldrepenger"
+        description="Skriv in stikkord om foreldrepenger"
       >
         <div>
           <Search />
