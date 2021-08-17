@@ -12,6 +12,7 @@ module.exports = {
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-docs",
+    "@storybook/addon-postcss",
     {
       name: "@storybook/addon-storysource",
       options: {
@@ -27,6 +28,5 @@ module.exports = {
         controls: { hideNoControlsWarning: true },
       },
     },
-    "@whitespace/storybook-addon-html",
   ],
 };
