@@ -80,7 +80,12 @@ const SearchField = forwardRef<HTMLInputElement, SearcFieldProps>(
             variant="action"
             {...buttonProps}
           >
-            <Search />
+            {!buttonProps?.children && (
+              <>
+                <Search />
+                Søk
+              </>
+            )}
           </Button>
         </div>
         <div id={errorId} aria-relevant="additions removals" aria-live="polite">
