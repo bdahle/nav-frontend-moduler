@@ -21,72 +21,76 @@ export interface InputGroupProps
   label: React.ReactNode;
 }
 
-const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
-  const {
-    inputProps,
-    errorId,
-    showErrorMsg,
-    hasError,
-    size,
-    inputDescriptionId,
-  } = useFormField(props, "textField");
+const TextField = forwardRef<HTMLInputElement, InputGroupProps>(
+  (props, ref) => {
+    const {
+      inputProps,
+      errorId,
+      showErrorMsg,
+      hasError,
+      size,
+      inputDescriptionId,
+    } = useFormField(props, "textField");
 
-  const {
-    label,
-    className,
-    description,
-    htmlSize,
-    hideLabel = false,
-    ...rest
-  } = props;
+    const {
+      label,
+      className,
+      description,
+      htmlSize,
+      hideLabel = false,
+      ...rest
+    } = props;
 
-  return (
-    <div
-      className={cl(
-        props.className,
-        "navds-form-field",
-        `navds-form-field--${size}`,
-        { "navds-text-field--error": hasError }
-      )}
-    >
-      <Label
-        htmlFor={inputProps.id}
-        size={size}
-        component="label"
-        className={cl("navds-text-field__label", { "sr-only": hideLabel })}
-      >
-        {label}
-      </Label>
-
-      {!!description && (
-        <BodyShort
-          className={cl("navds-text-field__description", {
-            "sr-only": hideLabel,
-          })}
-          id={inputDescriptionId}
-          size={size}
-        >
-          {description}
-        </BodyShort>
-      )}
-      <input
-        {...rest}
-        {...inputProps}
-        ref={ref}
-        type="text"
+    return (
+      <div
         className={cl(
-          className,
-          "navds-text-field__input",
-          "navds-body-short",
-          `navds-body-${size ?? "m"}`
+          props.className,
+          "navds-form-field",
+          `navds-form-field--${size}`,
+          { "navds-text-field--error": hasError }
         )}
-        size={htmlSize}
-      />
-      <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-        {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
+      >
+        <Label
+          htmlFor={inputProps.id}
+          size={size}
+          component="label"
+          className={cl("navds-text-field__label", { "sr-only": hideLabel })}
+        >
+          {label}
+        </Label>
+
+        {!!description && (
+          <BodyShort
+            className={cl("navds-text-field__description", {
+              "sr-only": hideLabel,
+            })}
+            id={inputDescriptionId}
+            size={size}
+          >
+            {description}
+          </BodyShort>
+        )}
+        <input
+          {...rest}
+          {...inputProps}
+          ref={ref}
+          type="text"
+          className={cl(
+            className,
+            "navds-text-field__input",
+            "navds-body-short",
+            `navds-body-${size ?? "m"}`
+          )}
+          size={htmlSize}
+        />
+        <div id={errorId} aria-relevant="additions removals" aria-live="polite">
+          {showErrorMsg && (
+            <ErrorMessage size={size}>{props.error}</ErrorMessage>
+          )}
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 export default TextField;
