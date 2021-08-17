@@ -20,7 +20,37 @@ export const All = () => {
         <div>
           <Search />
         </div>
-        <TextField label="Textfield label" />
+        <Button variant="action">Søk</Button>
+        <TextField hideLabel label="Textfield label" />
+      </InputGroup>
+
+      <h2>InputGroup small</h2>
+
+      <InputGroup
+        label="Søk for sider om foreldrepenger"
+        description="Skriv in stikkord om foreldrepenger"
+        size="s"
+      >
+        <div>
+          <Search />
+        </div>
+        <Button size="s" variant="action">
+          Søk
+        </Button>
+        <TextField size="s" hideLabel label="Textfield label" />
+      </InputGroup>
+
+      <h2>InputGroup m error</h2>
+
+      <InputGroup
+        label="Søk for sider om foreldrepenger"
+        description="Skriv in stikkord om foreldrepenger"
+        error="Errormsg"
+      >
+        <div>
+          <Search />
+        </div>
+        <TextField hideLabel label="Textfield label" />
         <Button variant="action">Søk</Button>
       </InputGroup>
     </div>

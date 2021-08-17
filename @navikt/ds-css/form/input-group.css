@@ -1,0 +1,40 @@
+.navds-input-group {
+  display: flex;
+  align-items: center;
+}
+
+.navds-input-group > * {
+  border-radius: 0;
+  min-height: 48px;
+}
+
+.navds-input-group--s > * {
+  min-height: 32px;
+}
+
+.navds-input-group input,
+.navds-input-group select {
+  border-radius: 0;
+}
+
+.navds-input-group > :first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.navds-input-group > :first-child input,
+.navds-input-group > :first-child select {
+  border-radius: 4px 0 0 4px;
+}
+
+.navds-input-group > :last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.navds-input-group > :last-child input,
+.navds-input-group > :last-child select {
+  border-radius: 0 4px 4px 0;
+}
+
+.navds-input-group > div:not(.navds-form-field) {
+  border: 1px solid black;
+}

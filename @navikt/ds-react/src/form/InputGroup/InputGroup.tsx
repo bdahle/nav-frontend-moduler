@@ -79,8 +79,18 @@ const TextField = forwardRef<HTMLInputElement, InputGroupProps>(
             `navds-body-${size ?? "m"}`
           )}
           size={htmlSize}
-        /> */}
-        {children}
+        />  */}
+        <div className={cl("navds-input-group", `navds-input-group--${size}`)}>
+          {/* {React.Children.map(children, (child) => {
+            if (React.isValidElement(child)) {
+              return React.cloneElement(child, {
+                ...child.props,
+                size: size,
+              });
+            }
+          })} */}
+          {children}
+        </div>
         <div id={errorId} aria-relevant="additions removals" aria-live="polite">
           {showErrorMsg && (
             <ErrorMessage size={size}>{props.error}</ErrorMessage>
