@@ -21,7 +21,7 @@ export const All = () => {
           <Search />
         </div>
         <Button variant="action">Søk</Button>
-        <TextField hideLabel label="Textfield label" />
+        <TextField label="Textfield label" />
       </InputGroup>
 
       <h2>InputGroup small</h2>

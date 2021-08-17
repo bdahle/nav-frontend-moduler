@@ -3,6 +3,7 @@ import cl from "classnames";
 import { BodyShort, Label } from "..";
 import ErrorMessage from "./ErrorMessage";
 import { FormFieldProps, useFormField } from "./useFormField";
+import { useInputGroup } from "./InputGroup/useInputGroup";
 
 export interface TextFieldProps
   extends FormFieldProps,
@@ -31,14 +32,46 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     inputDescriptionId,
   } = useFormField(props, "textField");
 
-  const {
-    label,
-    className,
-    description,
-    htmlSize,
-    hideLabel = false,
-    ...rest
-  } = props;
+  const { label, className, description, htmlSize, hideLabel, ...rest } = props;
+
+  const inputGroup = useInputGroup();
+
+  if (inputGroup !== null) {
+    return (
+      <div
+        className={cl(
+          props.className,
+          "navds-form-field",
+          `navds-form-field--${size}`,
+          { "navds-text-field--error": hasError }
+        )}
+      >
+        <Label
+          htmlFor={inputProps.id}
+          size={size}
+          component="label"
+          className={cl("navds-text-field__label", {
+            "sr-only": hideLabel ?? true,
+          })}
+        >
+          {label}
+        </Label>
+        <input
+          {...rest}
+          {...inputGroup.inputProps}
+          ref={ref}
+          type="text"
+          className={cl(
+            className,
+            "navds-text-field__input",
+            "navds-body-short",
+            `navds-body-${size ?? "m"}`
+          )}
+          size={htmlSize}
+        />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -53,7 +86,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
         htmlFor={inputProps.id}
         size={size}
         component="label"
-        className={cl("navds-text-field__label", { "sr-only": hideLabel })}
+        className={cl("navds-text-field__label", { "sr-only": !!hideLabel })}
       >
         {label}
       </Label>
@@ -61,7 +94,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
       {!!description && (
         <BodyShort
           className={cl("navds-text-field__description", {
-            "sr-only": hideLabel,
+            "sr-only": !!hideLabel,
           })}
           id={inputDescriptionId}
           size={size}

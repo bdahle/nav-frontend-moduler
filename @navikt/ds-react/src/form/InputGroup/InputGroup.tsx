@@ -3,6 +3,15 @@ import cl from "classnames";
 import { BodyShort, Label } from "../..";
 import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps, useFormField } from "../useFormField";
+import { useInputGroup } from "./useInputGroup";
+
+export type InputGroupContextProps = {
+  inputProps: any;
+};
+
+export const InputGroupContext = React.createContext<InputGroupContextProps | null>(
+  null
+);
 
 export interface InputGroupProps
   extends FormFieldProps,
@@ -39,35 +48,36 @@ const TextField = forwardRef<HTMLInputElement, InputGroupProps>(
     } = props;
 
     return (
-      <div
-        className={cl(
-          props.className,
-          "navds-form-field",
-          `navds-form-field--${size}`,
-          { "navds-form-field--error": hasError }
-        )}
-      >
-        <Label
-          htmlFor={inputProps.id}
-          size={size}
-          component="label"
-          className={cl("navds-input-group__label", { "sr-only": hideLabel })}
+      <InputGroupContext.Provider value={{ inputProps }}>
+        <div
+          className={cl(
+            props.className,
+            "navds-form-field",
+            `navds-form-field--${size}`,
+            { "navds-form-field--error": hasError }
+          )}
         >
-          {label}
-        </Label>
-
-        {!!description && (
-          <BodyShort
-            className={cl("navds-input-group__description", {
-              "sr-only": hideLabel,
-            })}
-            id={inputDescriptionId}
+          <Label
+            htmlFor={inputProps.id}
             size={size}
+            component="label"
+            className={cl("navds-input-group__label", { "sr-only": hideLabel })}
           >
-            {description}
-          </BodyShort>
-        )}
-        {/* <input
+            {label}
+          </Label>
+
+          {!!description && (
+            <BodyShort
+              className={cl("navds-input-group__description", {
+                "sr-only": hideLabel,
+              })}
+              id={inputDescriptionId}
+              size={size}
+            >
+              {description}
+            </BodyShort>
+          )}
+          {/* <input
           {...rest}
           {...inputProps}
           ref={ref}
@@ -80,8 +90,10 @@ const TextField = forwardRef<HTMLInputElement, InputGroupProps>(
           )}
           size={htmlSize}
         />  */}
-        <div className={cl("navds-input-group", `navds-input-group--${size}`)}>
-          {/* {React.Children.map(children, (child) => {
+          <div
+            className={cl("navds-input-group", `navds-input-group--${size}`)}
+          >
+            {/* {React.Children.map(children, (child) => {
             if (React.isValidElement(child)) {
               return React.cloneElement(child, {
                 ...child.props,
@@ -89,14 +101,19 @@ const TextField = forwardRef<HTMLInputElement, InputGroupProps>(
               });
             }
           })} */}
-          {children}
-        </div>
-        <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-          {showErrorMsg && (
-            <ErrorMessage size={size}>{props.error}</ErrorMessage>
-          )}
-        </div>
-      </div>
+            {children}
+          </div>
+          <div
+            id={errorId}
+            aria-relevant="additions removals"
+            aria-live="polite"
+          >
+            {showErrorMsg && (
+              <ErrorMessage size={size}>{props.error}</ErrorMessage>
+            )}
+          </div>
+        </div>{" "}
+      </InputGroupContext.Provider>
     );
   }
 );
