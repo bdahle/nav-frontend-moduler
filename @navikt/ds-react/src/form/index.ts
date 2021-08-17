@@ -9,6 +9,7 @@ export {
   FieldsetContext,
   FieldsetProps,
 } from "./Fieldset";
+export { default as InputGroup, InputGroupProps } from "./InputGroup";
 export { Radio, RadioGroup, RadioGroupProps, RadioProps } from "./radio";
 export { default as Select, SelectProps } from "./Select";
 export {
