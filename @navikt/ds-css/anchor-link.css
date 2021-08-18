@@ -1,0 +1,39 @@
+/* TODO: justere size basert på bold/non-bold? */
+
+.navds-anchor-link {
+  display: flex;
+  gap: var(--navds-spacing-2);
+  text-decoration: none;
+  width: fit-content;
+
+  /* navds-detail--s */
+  font-weight: var(--navds-font-weight-regular);
+}
+
+.navds-anchor-link:hover {
+  /* navds-detail--s */
+  font-weight: var(--navds-font-weight-bold);
+}
+
+.navds-anchor-link__icon {
+  display: flex;
+  align-items: center;
+}
+
+.navds-anchor-link__icon--filled {
+  display: none;
+}
+
+.navds-anchor-link:hover .navds-anchor-link__icon--regular {
+  display: none;
+}
+
+.navds-anchor-link:hover .navds-anchor-link__icon--filled {
+  display: block;
+}
+
+.navds-anchor-link__popover {
+  padding: 0.25rem;
+  border-radius: 4px;
+  color: var(--navds-color-darkgray);
+}

@@ -3,9 +3,13 @@
 @import "grid.css";
 @import "layouts.css";
 
+/* Komponenter konsumert av andre komponenter plasseres høyt */
+@import "popover.css";
+
 @import "accordion.css";
 @import "accordion-anchor-menu.css";
 @import "accordion-menu.css";
+@import "anchor-link.css";
 @import "alert.css";
 @import "button.css";
 @import "card.css";
@@ -17,7 +21,6 @@
 @import "link.css";
 @import "loader.css";
 @import "modal.css";
-@import "popover.css";
 @import "tag.css";
 @import "panel.css";
 @import "link-panel.css";
